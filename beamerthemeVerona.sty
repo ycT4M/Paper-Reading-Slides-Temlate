@@ -23,7 +23,7 @@
 
 \RequirePackage{fontspec}
 
-\usefonttheme{professionalfonts}
+\usefonttheme{serif}
 
 \setbeamerfont{normal text}{shape=\upshape, series=\mdseries}
 
@@ -73,6 +73,7 @@
 %\definecolor{DarkPurple}     {RGB}{142, 36, 170}
 \definecolor{DarkPurple}     {RGB}{0, 88, 21}
 \definecolor{LightPurple}    {RGB}{57, 130, 7}
+\definecolor{Black}          {RGB}{0,0,0}
 \ifbeamer@graytitle
    \setbeamercolor*{frametitle}{fg=Veronagray!80}
   \else
@@ -104,8 +105,8 @@
 \fi
 \fi
 \setbeamercolor*{author in head/foot}{fg=Veronagray!80,bg=}
-\setbeamercolor*{title in head/foot}{fg=Veronagray!80,bg=}
-\setbeamercolor*{date in head/foot}{fg=Veronagray!80,bg=}
+\setbeamercolor*{title in head/foot}{fg=Black!80,bg=}
+\setbeamercolor*{date in head/foot}{fg=Black,bg=}
 \setbeamercolor*{section in head/foot}{fg=Veronagray!80,bg=}
 \setbeamercolor*{subsection in head/foot}{fg=Veronagray!80,bg=}
 \setbeamercolor*{subtitle}{fg=white}
@@ -131,10 +132,11 @@
 \setbeamerfont*{title}{size=\LARGE,series=\bfseries,family=\lishu}
 \setbeamerfont*{subtitle}{size=\normalsize,series=\mdseries}
 \setbeamerfont*{frametitle}{size=\Large,series=\bfseries,family=\lishu}
-\setbeamerfont{framesubtitle}{series=\mdseries}
+\setbeamerfont{framesubtitle}{series=\mdseries, size=\large}
 \setbeamerfont*{author}{size=\small,series=\bfseries}
 \setbeamerfont*{date}{size=\footnotesize}
 \setbeamerfont*{block title}{size={}}
+\setbeamerfont*{paperauthor}{series=\bfseries}
 % ******************
 % innertheme
 % ******************
@@ -240,7 +242,7 @@ Command \noexpand\sidegraphics\MessageBreak
 \def\lectureinfoot{%
     \ifnum\thelecture=0\else
     %\textcolor{structure.fg}{$\cdot$\thelecture$\cdot$}
-    \tikz[overlay]\node[yshift=2pt,text=structure.fg] 
+    \tikz[overlay]\node[yshift=2pt,text=black] 
       {\bf$\cdot$\thelecture$\cdot$};
    \fi}
 \setbeamertemplate{footline}
@@ -251,20 +253,21 @@ Command \noexpand\sidegraphics\MessageBreak
 \draw[fill=\structureA,draw=\structureA,yshift=-.5mm] (15.89cm,3mm) rectangle ++ (1mm,1mm);
 \end{tikzpicture}
   \leavevmode%
-  \hfill\hbox{%
-  \begin{beamercolorbox}[wd=.3333333\paperwidth,ht=2.25ex,dp=1ex,left]{author in head/foot}%
-    \usebeamerfont{author in head/foot}\hspace*{1ex}\insertshortauthor\expandafter\beamer@ifempty\expandafter{\beamer@shortinstitute}{}{~~(\insertshortinstitute)}
+  % \hbox{%
+  % \begin{beamercolorbox}[wd=.3333333\paperwidth,ht=2.25ex,dp=1ex,left]{author in head/foot}%
+  %   \usebeamerfont{author in head/foot}\hspace*{1ex}\insertshortauthor\expandafter\beamer@ifempty\expandafter{\beamer@shortinstitute}{}{~~(\insertshortinstitute)}
+  % \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.3333333\paperwidth,ht=2.25ex,dp=1ex,left]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\hspace*{2mm}\insertshorttitle
   \end{beamercolorbox}%
-  \begin{beamercolorbox}[wd=.3333333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
-    \usebeamerfont{title in head/foot}\insertshorttitle
-  \end{beamercolorbox}%
+  \hfill
   \begin{beamercolorbox}[wd=.3333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
     % \usebeamerfont{date in head/foot}
     % \insertshortdate{}\hspace*{2em}
- \lectureinfoot\quad\insertframenumber~\tikz[overlay]\draw[draw=\structureA] (0,-.5mm) -- (0,1.6mm);~\inserttotalframenumber\hspace*{2mm} 
+  \lectureinfoot\quad\usebeamercolor[fg]{Black}\insertframenumber~\tikz[overlay]\draw[draw=Black] (0,-.5mm) -- (0,1.6mm);~\inserttotalframenumber\hspace*{2mm} 
   \end{beamercolorbox}}%
   \vskip0pt%
-}
+% }
 \fi
 % ******************
 % title page
@@ -290,11 +293,11 @@ Command \noexpand\sidegraphics\MessageBreak
       \fi}};
 \node[anchor=north west,align=left] at (0,-.9) {%
 \parbox{7cm}{
-      {\usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor}\vskip-.5ex
-      {\usebeamerfont{author}\usebeamercolor[fg]{author}\scriptsize\ttfamily\@mail}
+      {\usebeamerfont{paperauthor}\@paperauthor}
     \vskip3mm
-      \usebeamerfont{institute}\usebeamercolor[fg]{author}\insertinstitute
+      \usebeamerfont{institute}\@paperinstitute
     \vskip3mm
+      \usebeamerfont{normal text}\usebeamercolor[fg]{Black}\small{Presented by}~{\usebeamerfont{author}\insertauthor}\vskip0mm
       \usebeamercolor[fg]{date}\usebeamerfont{date}\insertdate
 }}; 
   \end{tikzpicture}
@@ -312,15 +315,16 @@ Command \noexpand\sidegraphics\MessageBreak
   \advance\@tempdima by\beamer@leftmargin%
   \advance\@tempdima by\beamer@rightmargin%
   \begin{beamercolorbox}[sep=0.3cm,left,wd=\the\@tempdima]{frametitle}
-    \usebeamerfont{frametitle}%
-    \vbox{}\vskip-1ex%
-    \strut\insertframetitle\strut\par%
     {%
       \ifx\insertframesubtitle\@empty%
       \else%
       {\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\insertframesubtitle\strut\par}%
+      \vskip-1mm
       \fi
     }%
+    \usebeamerfont{frametitle}%
+    % \vbox{}\vskip-1ex%
+    \strut\insertframetitle\strut\par%
     \vskip-1ex%
     \if@tempswa\else\vskip-1ex\fi% set inside beamercolorbox... evil here...
   \end{beamercolorbox}%
@@ -329,7 +333,8 @@ Command \noexpand\sidegraphics\MessageBreak
 \else
 \begin{tikzpicture}[overlay]
 \draw[line width=1mm,draw=structure.fg,yshift=.5ex] (-0.5,0) -- (\frametitlesidebar,0);
-\node[anchor=north east] at (\frametitlesidebar-12pt,35pt) {\includegraphics[height=0.78cm]{sysu_horizontal.png}};
+% Uncomment to draw header logo
+% \node[anchor=north east] at (\frametitlesidebar-12pt,35pt) {\includegraphics[height=0.78cm]{sysu_horizontal.png}};
 \end{tikzpicture}
 \vspace{-.5ex}
 \fi
@@ -350,8 +355,10 @@ Command \noexpand\sidegraphics\MessageBreak
 \titlepage
 \end{frame}}
 
-\newcommand{\mail}[1]{\def\@mail{#1}}
-\mail{}
+\newcommand{\paperauthor}[1]{\def\@paperauthor{#1}}
+\paperauthor{}
+\newcommand{\paperinstitute}[1]{\def\@paperinstitute{#1}}
+\paperinstitute{}
 \newcommand\datelecture{\@dblarg\beamer@datelecture}
 \long\def\beamer@datelecture[#1]#2#3#4{
   \beamer@savemode

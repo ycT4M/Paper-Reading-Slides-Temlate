@@ -17,6 +17,8 @@ aspectratio=169,
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{lipsum}
+% Times New Roman
+\usepackage{newtxtext}
 \definecolor{col}{RGB}{4,74,21}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Mac上使用如下命令声明隶书字体，windows也有相关方式，大家可自行修改
@@ -30,7 +32,7 @@ aspectratio=169,
 \usepackage{listings}
 \usepackage{caption}
 \usepackage{subcaption}
-\usefonttheme{professionalfonts}
+% \usefonttheme{professionalfonts}
 \def\mathfamilydefault{\rmdefault}
 \usepackage{amsmath}
 \usepackage{multirow}
@@ -39,26 +41,27 @@ aspectratio=169,
 \setbeamertemplate{section in toc}{\hspace*{1em}\inserttocsectionnumber.~\inserttocsection\par}
 \setbeamertemplate{subsection in toc}{\hspace*{2em}\inserttocsectionnumber.\inserttocsubsectionnumber.~\inserttocsubsection\par}
 \setbeamerfont{subsection in toc}{size=\small}
-\AtBeginSection[]{%
-	\begin{frame}%
-		\frametitle{Outline}%
-		\textbf{\tableofcontents[currentsection]} %
-	\end{frame}%
-}
 
-\AtBeginSubsection[]{%
-	\begin{frame}%
-		\frametitle{Outline}%
-		\textbf{\tableofcontents[currentsection, currentsubsection]} %
-	\end{frame}%
-}
+% \AtBeginSection[]{%
+% 	\begin{frame}%
+% 		\frametitle{Outline}%
+% 		\framesubtitle{Test}
+% 		\textbf{\tableofcontents[currentsection]} %
+% 	\end{frame}%
+% }
+
+% \AtBeginSubsection[]{%
+% 	\begin{frame}%
+% 		\frametitle{Outline}%
+% 		\textbf{\tableofcontents[currentsection, currentsubsection]} %
+% 	\end{frame}%
+% }
 
 \title{Beamer for Paper Reading Slides}
-\subtitle{Sub-Title}
+\subtitle{Conferece / Transaction}
 \author{Runze Tan}
-\mail{tanrz5@mail2.sysu.edu.cn}
-\institute[Shenzhen Campus of Sun Yat-sen University]{School of Cyber Science and Technology\\
-Sun Yat-sen University}
+\paperauthor{Name}
+\paperinstitute{Inst}
 \date{\today}
 \titlegraphic[width=3cm]{sysu_logo}{}
 
